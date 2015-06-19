@@ -7,7 +7,7 @@ PHP Library for using viewer.filelabel.co in your application.
     header('Location: '.$url);
 
 ## URL Obfuscation
-If you load the document with the basic code above, the URL to your document will be made public. If you'd like to hide the URL, use the following:
+If you load the document with the basic code above, the URL to your document will be made public. If you'd like to hide that URL, use the following:
 
     $viewer = new Fileviewer('YOUR_API_KEY');
     $url = $viewer->load('http://viewer.filelabel.co/documents/file.pdf', true);
@@ -37,3 +37,21 @@ You may want to limit access to certain features programmatically, depending on 
         'share',
         'stickyNotes'
     );
+    
+Use code like the following. For example, this prevents printing or annotating of the document:
+
+    $viewer = new Fileviewer(
+        'YOUR_API_KEY',
+        'http://viewer.filelabel.co/documents/file.pdf',
+        array(
+            'annotate' => false,
+            'download' => true,
+            'hideAnnotations' => true,
+            'print' => false,
+            'share' => true,
+            'stickyNotes' => true        
+        )
+    );
+    $viewer->load();
+
+This also requires at least a "pro" account.

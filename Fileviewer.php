@@ -85,7 +85,7 @@ class Fileviewer {
 		$outText = '';
 		for($i=0;$i<strlen($text);) :
 			for($j=0;$j<strlen($key);$j++,$i++) :
-				$outText .= $text{$i} ^ $key{$j};
+				$outText .= @$text{$i} ^ $key{$j};
 			endfor;
 		endfor;
 		return $outText;

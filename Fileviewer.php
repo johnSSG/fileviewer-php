@@ -8,14 +8,18 @@ class Fileviewer {
 		$this->permissions = $permissions;
 		$this->auth = $this->auth();
 		if($this->auth) :
-			$_SESSION['fileViewerToken'] = $this->auth->accessToken;
+			if(is_object($this->auth)) :
+				$_SESSION['fileViewerToken'] = $this->auth->accessToken;
+			else :
+				$_SESSION['fileViewerToken'] = $this->auth;
+			endif;
 		endif;
 	}
 	
-	public function auth() {
+	public function auth() {		
 		if(isset($_SESSION['fileViewerToken'])) :
 			if($this->doc == false && $this->permissions == false) :
-				if($_SESSION['fileViewerToken']) :
+				if($_SESSION['fileViewerToken']) :				
 					return $_SESSION['fileViewerToken'];
 				endif;			
 			endif;
